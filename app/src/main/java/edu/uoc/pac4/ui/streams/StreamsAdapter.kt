@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import edu.uoc.pac4.R
-import edu.uoc.pac4.data.streams.Stream
+import edu.uoc.pac4.data.streams.model.Stream
 import kotlinx.android.synthetic.main.item_stream.view.*
 import java.text.NumberFormat
 

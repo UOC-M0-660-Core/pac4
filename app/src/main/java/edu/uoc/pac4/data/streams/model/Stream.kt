@@ -1,4 +1,4 @@
-package edu.uoc.pac4.data.streams
+package edu.uoc.pac4.data.streams.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Stream(
+
     @SerialName("id") val id: String,
     @SerialName("user_id") val userId: String? = null,
     @SerialName("user_name") val userName: String? = null,

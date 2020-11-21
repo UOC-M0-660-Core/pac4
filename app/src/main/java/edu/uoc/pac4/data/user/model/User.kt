@@ -1,4 +1,4 @@
-package edu.uoc.pac4.data.user
+package edu.uoc.pac4.data.user.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
