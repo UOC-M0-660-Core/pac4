@@ -24,7 +24,7 @@ val dataModule = module {
 
     // HttpClient
     factory<HttpClient> {
-        Network.createHttpClient(sessionManager = get())
+        Network.createHttpClient(context = androidContext())
     }
     // Authentication
     factory { SessionManager(context = androidContext()) }
