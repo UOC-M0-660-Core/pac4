@@ -93,7 +93,7 @@ class OAuthActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         // Create Twitch Service
-        val service = TwitchApiService(Network.createHttpClient(SessionManager(this)))
+        val service = TwitchApiService(Network.createHttpClient(this))
         // Launch new thread attached to this Activity.
         // If the Activity is closed, this Thread will be cancelled
         lifecycleScope.launch {

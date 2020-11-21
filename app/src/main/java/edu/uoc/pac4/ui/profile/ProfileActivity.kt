@@ -17,7 +17,7 @@ import edu.uoc.pac4.data.network.Network
 import edu.uoc.pac4.ui.login.LoginActivity
 import edu.uoc.pac4.data.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
-import edu.uoc.pac4.data.oauth.UnauthorizedException
+import edu.uoc.pac4.data.network.UnauthorizedException
 import edu.uoc.pac4.data.user.User
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private val TAG = "ProfileActivity"
 
-    private val twitchApiService = TwitchApiService(Network.createHttpClient(SessionManager(this)))
+    private val twitchApiService = TwitchApiService(Network.createHttpClient(this))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
