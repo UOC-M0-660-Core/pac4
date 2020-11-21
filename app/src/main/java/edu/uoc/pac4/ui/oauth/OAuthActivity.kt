@@ -1,4 +1,4 @@
-package edu.uoc.pac4.oauth
+package edu.uoc.pac4.ui.oauth
 
 import android.content.Intent
 import android.net.Uri

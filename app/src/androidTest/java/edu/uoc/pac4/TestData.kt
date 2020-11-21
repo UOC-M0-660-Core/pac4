@@ -20,8 +20,6 @@ object TestData {
 
     // Network
     fun provideHttpClient(context: Context): HttpClient = Network.createHttpClient(context)
-    fun provideTwitchService(context: Context): TwitchApiService =
-        TwitchApiService(provideHttpClient(context))
 
     // Tokens
     const val dummyAccessToken = "access_12345"

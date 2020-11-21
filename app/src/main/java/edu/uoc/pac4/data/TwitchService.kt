@@ -16,6 +16,7 @@ import io.ktor.client.request.*
  * Created by alex on 24/10/2020.
  */
 
+@Deprecated("Refactor with Repository + DataSources")
 class TwitchApiService(private val httpClient: HttpClient) {
     private val TAG = "TwitchApiService"
 

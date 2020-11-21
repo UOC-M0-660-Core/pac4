@@ -1,0 +1,16 @@
+package edu.uoc.pac4.data.oauth
+
+/**
+ * Created by alex on 12/09/2020.
+ */
+
+interface AuthenticationRepository {
+
+    fun isUserAvailable(): Boolean
+
+    /// Returns true if the user logged in successfully. False otherwise
+    suspend fun login(authorizationCode: String): Boolean
+
+    fun logout()
+
+}

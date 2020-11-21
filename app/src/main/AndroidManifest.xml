@@ -19,19 +19,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".oauth.LoginActivity"
+            android:name="edu.uoc.pac4.ui.oauth.LoginActivity"
             android:label="@string/activity_login_title" />
         <activity
-            android:name=".oauth.OAuthActivity"
+            android:name="edu.uoc.pac4.ui.oauth.OAuthActivity"
             android:label="@string/activity_oauth_title"
-            android:parentActivityName=".oauth.LoginActivity" />
+            android:parentActivityName="edu.uoc.pac4.ui.oauth.LoginActivity" />
         <activity
-            android:name=".twitch.streams.StreamsActivity"
+            android:name="edu.uoc.pac4.ui.twitch.streams.StreamsActivity"
             android:label="@string/activity_streams_title" />
         <activity
-            android:name=".twitch.profile.ProfileActivity"
+            android:name="edu.uoc.pac4.ui.twitch.profile.ProfileActivity"
             android:label="@string/activity_profile_title"
-            android:parentActivityName=".twitch.streams.StreamsActivity" />
+            android:parentActivityName="edu.uoc.pac4.ui.twitch.streams.StreamsActivity" />
     </application>
 
 </manifest>

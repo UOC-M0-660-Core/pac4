@@ -1,4 +1,4 @@
-package edu.uoc.pac4.twitch.profile
+package edu.uoc.pac4.ui.twitch.profile
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import edu.uoc.pac4.R
 import edu.uoc.pac4.data.network.Network
-import edu.uoc.pac4.oauth.LoginActivity
+import edu.uoc.pac4.ui.oauth.LoginActivity
 import edu.uoc.pac4.data.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
 import edu.uoc.pac4.data.oauth.UnauthorizedException

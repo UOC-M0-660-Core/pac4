@@ -10,7 +10,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import edu.uoc.pac4.data.SessionManager
-import edu.uoc.pac4.twitch.profile.ProfileActivity
+import edu.uoc.pac4.ui.twitch.profile.ProfileActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

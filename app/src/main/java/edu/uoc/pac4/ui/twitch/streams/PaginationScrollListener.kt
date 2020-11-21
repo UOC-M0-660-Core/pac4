@@ -1,4 +1,4 @@
-package edu.uoc.pac4.twitch.streams
+package edu.uoc.pac4.ui.twitch.streams
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
