@@ -6,11 +6,11 @@ package edu.uoc.pac4.data.oauth
 
 interface AuthenticationRepository {
 
-    fun isUserAvailable(): Boolean
+    suspend fun isUserAvailable(): Boolean
 
     /// Returns true if the user logged in successfully. False otherwise
     suspend fun login(authorizationCode: String): Boolean
 
-    fun logout()
+    suspend fun logout()
 
 }

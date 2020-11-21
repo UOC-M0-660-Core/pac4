@@ -1,4 +1,4 @@
-package edu.uoc.pac4.ui.twitch.streams
+package edu.uoc.pac4.ui.streams
 
 import android.view.LayoutInflater
 import android.view.View

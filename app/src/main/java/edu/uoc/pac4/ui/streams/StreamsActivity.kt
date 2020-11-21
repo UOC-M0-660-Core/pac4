@@ -1,4 +1,4 @@
-package edu.uoc.pac4.ui.twitch.streams
+package edu.uoc.pac4.ui.streams
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,8 +14,8 @@ import edu.uoc.pac4.data.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
 import edu.uoc.pac4.data.network.Network
 import edu.uoc.pac4.data.oauth.UnauthorizedException
-import edu.uoc.pac4.ui.oauth.LoginActivity
-import edu.uoc.pac4.ui.twitch.profile.ProfileActivity
+import edu.uoc.pac4.ui.login.LoginActivity
+import edu.uoc.pac4.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_streams.*
 import kotlinx.coroutines.launch
 

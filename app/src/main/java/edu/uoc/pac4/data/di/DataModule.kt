@@ -10,5 +10,7 @@ import org.koin.dsl.module
 
 val dataModule = module {
     // TODO: Init your Data Dependencies
-    single<StreamsRepository> { TwitchStreamsRepository() }
+
+    // Streams example
+    // single<StreamsRepository> { TwitchStreamsRepository() }
 }

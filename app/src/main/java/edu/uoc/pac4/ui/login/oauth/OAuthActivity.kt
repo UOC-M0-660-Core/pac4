@@ -1,4 +1,4 @@
-package edu.uoc.pac4.ui.oauth
+package edu.uoc.pac4.ui.login.oauth
 
 import android.content.Intent
 import android.net.Uri
@@ -11,7 +11,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import edu.uoc.pac4.LaunchActivity
+import edu.uoc.pac4.ui.LaunchActivity
 import edu.uoc.pac4.R
 import edu.uoc.pac4.data.SessionManager
 import edu.uoc.pac4.data.TwitchApiService

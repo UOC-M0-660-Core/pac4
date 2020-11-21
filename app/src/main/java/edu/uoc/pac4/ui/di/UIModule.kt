@@ -1,5 +1,7 @@
 package edu.uoc.pac4.ui.di
 
+import edu.uoc.pac4.ui.LaunchViewModel
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -8,4 +10,7 @@ import org.koin.dsl.module
 
 val uiModule = module {
     // TODO: Init your UI Dependencies
+
+    // LaunchViewModel example
+    // viewModel { LaunchViewModel(repository = get()) }
 }

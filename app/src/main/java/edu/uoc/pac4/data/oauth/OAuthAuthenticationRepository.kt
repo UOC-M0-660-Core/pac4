@@ -7,7 +7,7 @@ class OAuthAuthenticationRepository(
     // TODO: Add any datasources you may need
 ) : AuthenticationRepository {
 
-    override fun isUserAvailable(): Boolean {
+    override suspend fun isUserAvailable(): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -15,7 +15,7 @@ class OAuthAuthenticationRepository(
         TODO("Not yet implemented")
     }
 
-    override fun logout() {
+    override suspend fun logout() {
         TODO("Not yet implemented")
     }
 }

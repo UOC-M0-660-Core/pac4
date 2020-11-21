@@ -1,9 +1,10 @@
-package edu.uoc.pac4.ui.oauth
+package edu.uoc.pac4.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import edu.uoc.pac4.R
+import edu.uoc.pac4.ui.login.oauth.OAuthActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {

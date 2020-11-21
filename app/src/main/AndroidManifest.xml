@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LaunchActivity">
+        <activity android:name=".ui.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,19 +19,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.uoc.pac4.ui.oauth.LoginActivity"
+            android:name="edu.uoc.pac4.ui.login.LoginActivity"
             android:label="@string/activity_login_title" />
         <activity
-            android:name="edu.uoc.pac4.ui.oauth.OAuthActivity"
+            android:name="edu.uoc.pac4.ui.login.oauth.OAuthActivity"
             android:label="@string/activity_oauth_title"
-            android:parentActivityName="edu.uoc.pac4.ui.oauth.LoginActivity" />
+            android:parentActivityName="edu.uoc.pac4.ui.login.LoginActivity" />
         <activity
-            android:name="edu.uoc.pac4.ui.twitch.streams.StreamsActivity"
+            android:name="edu.uoc.pac4.ui.streams.StreamsActivity"
             android:label="@string/activity_streams_title" />
         <activity
-            android:name="edu.uoc.pac4.ui.twitch.profile.ProfileActivity"
+            android:name="edu.uoc.pac4.ui.profile.ProfileActivity"
             android:label="@string/activity_profile_title"
-            android:parentActivityName="edu.uoc.pac4.ui.twitch.streams.StreamsActivity" />
+            android:parentActivityName="edu.uoc.pac4.ui.streams.StreamsActivity" />
     </application>
 
 </manifest>
