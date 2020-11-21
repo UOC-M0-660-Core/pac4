@@ -63,6 +63,8 @@ class OAuthActivity : AppCompatActivity() {
                                 // Got it!
                                 Log.d("OAuth", "Here is the authorization code! $code")
                                 onAuthorizationCodeRetrieved(code)
+                                // Hide WebView
+                                webView.visibility = View.GONE
                             } ?: run {
                                 // User cancelled the login flow
                                 // Handle error
@@ -91,7 +93,7 @@ class OAuthActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         // Create Twitch Service
-        val service = TwitchApiService(Network.createHttpClient(this@OAuthActivity))
+        val service = TwitchApiService(Network.createHttpClient(SessionManager(this)))
         // Launch new thread attached to this Activity.
         // If the Activity is closed, this Thread will be cancelled
         lifecycleScope.launch {

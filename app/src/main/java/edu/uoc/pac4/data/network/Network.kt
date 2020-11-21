@@ -1,6 +1,5 @@
 package edu.uoc.pac4.data.network
 
-import android.content.Context
 import android.util.Log
 import edu.uoc.pac4.data.oauth.OAuthTokensResponse
 import edu.uoc.pac4.data.oauth.OAuthConstants
@@ -21,7 +20,7 @@ object Network {
 
     private const val TAG = "Network"
 
-    fun createHttpClient(context: Context): HttpClient {
+    fun createHttpClient(sessionManager: SessionManager): HttpClient {
         return HttpClient(OkHttp) {
             // Json
             install(JsonFeature) {
@@ -56,15 +55,15 @@ object Network {
             // Add OAuth Feature
             install(OAuthFeature) {
                 getToken = {
-                    val accessToken = SessionManager(context).getAccessToken() ?: ""
+                    val accessToken = sessionManager.getAccessToken() ?: ""
                     Log.d(TAG, "Adding Bearer header with token $accessToken")
                     accessToken
                 }
                 refreshToken = {
                     // Remove expired access token
-                    SessionManager(context).clearAccessToken()
+                    sessionManager.clearAccessToken()
                     // Launch token refresh request
-                    launchTokenRefresh(context)
+                    launchTokenRefresh(sessionManager)
                 }
             }
         }
@@ -76,14 +75,13 @@ object Network {
         encodeDefaults = false
     }
 
-    private suspend fun launchTokenRefresh(context: Context) {
-        val sessionManager = SessionManager(context)
+    private suspend fun launchTokenRefresh(sessionManager: SessionManager) {
         // Get Refresh Token
         sessionManager.getRefreshToken()?.let { refreshToken ->
             try {
                 // Launch Refresh Request
                 val response =
-                    createHttpClient(context).post<OAuthTokensResponse>(Endpoints.tokenUrl) {
+                    createHttpClient(sessionManager).post<OAuthTokensResponse>(Endpoints.tokenUrl) {
                         parameter("client_id", OAuthConstants.clientID)
                         parameter("client_secret", OAuthConstants.clientSecret)
                         parameter("refresh_token", refreshToken)

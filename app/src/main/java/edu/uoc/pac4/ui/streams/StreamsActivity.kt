@@ -26,7 +26,7 @@ class StreamsActivity : AppCompatActivity() {
     private val adapter = StreamsAdapter()
     private val layoutManager = LinearLayoutManager(this)
 
-    private val twitchApiService = TwitchApiService(Network.createHttpClient(this))
+    private val twitchApiService = TwitchApiService(Network.createHttpClient(SessionManager(this)))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
