@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uoc.pac4.R
-import edu.uoc.pac4.data.SessionManager
+import edu.uoc.pac4.data.oauth.datasource.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
-import edu.uoc.pac4.data.network.Network
-import edu.uoc.pac4.data.network.UnauthorizedException
+import edu.uoc.pac4.data.util.Network
+import edu.uoc.pac4.data.util.OAuthException
 import edu.uoc.pac4.ui.login.LoginActivity
 import edu.uoc.pac4.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_streams.*
@@ -26,7 +26,7 @@ class StreamsActivity : AppCompatActivity() {
     private val adapter = StreamsAdapter()
     private val layoutManager = LinearLayoutManager(this)
 
-    private val twitchApiService = TwitchApiService(Network.createHttpClient(this))
+    private val twitchApiService = TwitchApiService(Network.createHttpClient(this, "", ""))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,13 +102,20 @@ class StreamsActivity : AppCompatActivity() {
                 // Hide Loading
                 swipeRefreshLayout.isRefreshing = false
 
-            } catch (t: UnauthorizedException) {
+            } catch (t: OAuthException.Unauthorized) {
                 Log.w(TAG, "Unauthorized Error getting streams", t)
                 // Clear local access token
                 SessionManager(this@StreamsActivity).clearAccessToken()
                 // User was logged out, close screen and open login
                 finish()
                 startActivity(Intent(this@StreamsActivity, LoginActivity::class.java))
+            } catch (t: Throwable) {
+                // We don't know why this happen, just show an error message
+                Log.w(TAG, "Unknown error getting streams", t)
+                Toast.makeText(
+                    this@StreamsActivity,
+                    getString(R.string.error_streams), Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

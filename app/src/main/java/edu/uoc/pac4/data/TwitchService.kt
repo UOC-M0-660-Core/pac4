@@ -1,10 +1,10 @@
 package edu.uoc.pac4.data
 
 import android.util.Log
-import edu.uoc.pac4.data.network.Endpoints
-import edu.uoc.pac4.data.oauth.OAuthConstants
-import edu.uoc.pac4.data.oauth.OAuthTokensResponse
-import edu.uoc.pac4.data.network.UnauthorizedException
+import edu.uoc.pac4.data.util.Endpoints
+import edu.uoc.pac4.data.util.OAuthConstants
+import edu.uoc.pac4.data.oauth.model.OAuthTokensResponse
+import edu.uoc.pac4.data.util.OAuthException.Unauthorized
 import edu.uoc.pac4.data.streams.StreamsResponse
 import edu.uoc.pac4.data.user.User
 import edu.uoc.pac4.data.user.UsersResponse
@@ -42,7 +42,7 @@ class TwitchApiService(private val httpClient: HttpClient) {
     }
 
     /// Gets Streams on Twitch
-    @Throws(UnauthorizedException::class)
+    @Throws(Unauthorized::class)
     suspend fun getStreams(cursor: String? = null): StreamsResponse? {
         try {
             val response = httpClient
@@ -56,8 +56,8 @@ class TwitchApiService(private val httpClient: HttpClient) {
             return when (t) {
                 is ClientRequestException -> {
                     // Check if it's a 401 Unauthorized
-                    if (t.response?.status?.value == 401) {
-                        throw UnauthorizedException
+                    if (t.response.status.value == 401) {
+                        throw Unauthorized
                     }
                     null
                 }
@@ -67,7 +67,7 @@ class TwitchApiService(private val httpClient: HttpClient) {
     }
 
     /// Gets Current Authorized User on Twitch
-    @Throws(UnauthorizedException::class)
+    @Throws(Unauthorized::class)
     suspend fun getUser(): User? {
         try {
             val response = httpClient
@@ -80,8 +80,8 @@ class TwitchApiService(private val httpClient: HttpClient) {
             return when (t) {
                 is ClientRequestException -> {
                     // Check if it's a 401 Unauthorized
-                    if (t.response?.status?.value == 401) {
-                        throw UnauthorizedException
+                    if (t.response.status.value == 401) {
+                        throw Unauthorized
                     }
                     null
                 }
@@ -91,7 +91,7 @@ class TwitchApiService(private val httpClient: HttpClient) {
     }
 
     /// Gets Current Authorized User on Twitch
-    @Throws(UnauthorizedException::class)
+    @Throws(Unauthorized::class)
     suspend fun updateUserDescription(description: String): User? {
         try {
             val response = httpClient
@@ -106,8 +106,8 @@ class TwitchApiService(private val httpClient: HttpClient) {
             return when (t) {
                 is ClientRequestException -> {
                     // Check if it's a 401 Unauthorized
-                    if (t.response?.status?.value == 401) {
-                        throw UnauthorizedException
+                    if (t.response.status.value == 401) {
+                        throw Unauthorized
                     }
                     null
                 }

@@ -13,17 +13,22 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import edu.uoc.pac4.ui.LaunchActivity
 import edu.uoc.pac4.R
-import edu.uoc.pac4.data.SessionManager
+import edu.uoc.pac4.data.oauth.datasource.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
-import edu.uoc.pac4.data.network.Endpoints
-import edu.uoc.pac4.data.network.Network
-import edu.uoc.pac4.data.oauth.OAuthConstants
+import edu.uoc.pac4.data.oauth.repository.AuthenticationRepository
+import edu.uoc.pac4.data.util.Endpoints
+import edu.uoc.pac4.data.util.Network
+import edu.uoc.pac4.data.util.OAuthConstants
 import kotlinx.android.synthetic.main.activity_oauth.*
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class OAuthActivity : AppCompatActivity() {
 
     private val TAG = "StreamsActivity"
+
+    // Temporary repository before creating the OAuthViewModel
+    val repository: AuthenticationRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +98,7 @@ class OAuthActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         // Create Twitch Service
-        val service = TwitchApiService(Network.createHttpClient(this))
+        val service = TwitchApiService(Network.createHttpClient(this, "", ""))
         // Launch new thread attached to this Activity.
         // If the Activity is closed, this Thread will be cancelled
         lifecycleScope.launch {

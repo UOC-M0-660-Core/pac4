@@ -1,4 +1,4 @@
-package edu.uoc.pac4.data.oauth
+package edu.uoc.pac4.data.oauth.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

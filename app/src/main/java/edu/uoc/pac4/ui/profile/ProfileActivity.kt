@@ -13,12 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import edu.uoc.pac4.R
-import edu.uoc.pac4.data.network.Network
+import edu.uoc.pac4.data.util.Network
 import edu.uoc.pac4.ui.login.LoginActivity
-import edu.uoc.pac4.data.SessionManager
+import edu.uoc.pac4.data.oauth.datasource.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
-import edu.uoc.pac4.data.network.UnauthorizedException
 import edu.uoc.pac4.data.user.User
+import edu.uoc.pac4.data.util.OAuthException
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.coroutines.launch
 
@@ -26,7 +26,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private val TAG = "ProfileActivity"
 
-    private val twitchApiService = TwitchApiService(Network.createHttpClient(this))
+    private val twitchApiService = TwitchApiService(Network.createHttpClient(this, "", ""))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +66,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             // Hide Loading
             progressBar.visibility = GONE
-        } catch (t: UnauthorizedException) {
+        } catch (t: OAuthException.Unauthorized) {
             onUnauthorized()
         }
     }
@@ -86,7 +86,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             // Hide Loading
             progressBar.visibility = GONE
-        } catch (t: UnauthorizedException) {
+        } catch (t: OAuthException.Unauthorized) {
             onUnauthorized()
         }
     }

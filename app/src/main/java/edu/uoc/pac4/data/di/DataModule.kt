@@ -1,7 +1,13 @@
 package edu.uoc.pac4.data.di
 
-import edu.uoc.pac4.data.streams.StreamsRepository
-import edu.uoc.pac4.data.streams.TwitchStreamsRepository
+import edu.uoc.pac4.data.oauth.datasource.SessionManager
+import edu.uoc.pac4.data.util.Network
+import edu.uoc.pac4.data.util.OAuthConstants
+import edu.uoc.pac4.data.oauth.datasource.TwitchAuthenticationService
+import edu.uoc.pac4.data.oauth.repository.AuthenticationRepository
+import edu.uoc.pac4.data.oauth.repository.OAuthAuthenticationRepository
+import io.ktor.client.*
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 /**
@@ -9,8 +15,27 @@ import org.koin.dsl.module
  */
 
 val dataModule = module {
-    // TODO: Init your Data Dependencies
 
-    // Streams example
-    // single<StreamsRepository> { TwitchStreamsRepository() }
+    // TODO: Init your other Data Dependencies
+
+    // Utils
+    single<HttpClient> {
+        Network.createHttpClient(
+            androidContext(),
+            OAuthConstants.clientID,
+            OAuthConstants.clientSecret
+        )
+    }
+
+    // Data Sources
+    single<SessionManager> { SessionManager(androidContext()) }
+    single<TwitchAuthenticationService> { TwitchAuthenticationService(httpClient = get()) }
+
+    // Repositories
+    single<AuthenticationRepository> {
+        OAuthAuthenticationRepository(
+            sessionManager = get(),
+            twitchAuthenticationService = get(),
+        )
+    }
 }
