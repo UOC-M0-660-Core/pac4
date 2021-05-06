@@ -37,15 +37,13 @@ class StreamsAdapter : ListAdapter<Stream, StreamsAdapter.StreamViewHolder>(stre
             itemView.description.text = stream.title
 
             // Set Stream Image
-            stream.thumbnailUrl
-                ?.replace("{width}", "1014")
-                ?.replace("{height}", "396")
-                ?.let {
-                    Glide.with(itemView)
-                        .load(it)
-                        .centerCrop()
-                        .into(itemView.imageView)
-                }
+            val imageUrl = stream.thumbnailUrl?.let {
+                stream.getSizedImage(it, 1014, 396)
+            }
+            Glide.with(itemView)
+                .load(imageUrl)
+                .centerCrop()
+                .into(itemView.imageView)
             // Set Stream Views
             val formattedViews = NumberFormat.getInstance().format(stream.viewerCount)
             itemView.viewsText.text = itemView.context.resources

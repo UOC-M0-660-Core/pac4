@@ -18,7 +18,13 @@ data class Stream(
     @SerialName("started_at") val startedAtString: String? = null,
     @SerialName("language") val language: String? = null,
     @SerialName("thumbnail_url") val thumbnailUrl: String? = null,
-)
+) {
+    fun getSizedImage(imageUrl: String, width: Int, height: Int): String {
+        return imageUrl
+            .replace("{width}", width.toString())
+            .replace("{height}", height.toString())
+    }
+}
 
 @Serializable
 data class StreamsResponse(
