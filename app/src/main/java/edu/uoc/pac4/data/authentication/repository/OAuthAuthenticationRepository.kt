@@ -1,8 +1,8 @@
-package edu.uoc.pac4.data.oauth.repository
+package edu.uoc.pac4.data.authentication.repository
 
 import android.util.Log
-import edu.uoc.pac4.data.oauth.datasource.SessionManager
-import edu.uoc.pac4.data.oauth.datasource.TwitchAuthenticationService
+import edu.uoc.pac4.data.authentication.datasource.SessionManager
+import edu.uoc.pac4.data.authentication.datasource.TwitchAuthenticationService
 
 /**
  * Created by alex on 11/21/20.

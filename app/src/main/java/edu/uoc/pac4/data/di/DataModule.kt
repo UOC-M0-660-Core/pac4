@@ -1,11 +1,11 @@
 package edu.uoc.pac4.data.di
 
-import edu.uoc.pac4.data.oauth.datasource.SessionManager
+import edu.uoc.pac4.data.authentication.datasource.SessionManager
 import edu.uoc.pac4.data.util.Network
 import edu.uoc.pac4.data.util.OAuthConstants
-import edu.uoc.pac4.data.oauth.datasource.TwitchAuthenticationService
-import edu.uoc.pac4.data.oauth.repository.AuthenticationRepository
-import edu.uoc.pac4.data.oauth.repository.OAuthAuthenticationRepository
+import edu.uoc.pac4.data.authentication.datasource.TwitchAuthenticationService
+import edu.uoc.pac4.data.authentication.repository.AuthenticationRepository
+import edu.uoc.pac4.data.authentication.repository.OAuthAuthenticationRepository
 import io.ktor.client.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module

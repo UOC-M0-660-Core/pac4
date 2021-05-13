@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uoc.pac4.R
-import edu.uoc.pac4.data.oauth.datasource.SessionManager
+import edu.uoc.pac4.data.authentication.datasource.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
 import edu.uoc.pac4.data.util.Network
 import edu.uoc.pac4.data.util.OAuthException

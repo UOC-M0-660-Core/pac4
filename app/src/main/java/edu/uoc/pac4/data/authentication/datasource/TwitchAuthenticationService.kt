@@ -1,9 +1,8 @@
-package edu.uoc.pac4.data.oauth.datasource
+package edu.uoc.pac4.data.authentication.datasource
 
-import android.util.Log
 import edu.uoc.pac4.data.util.Endpoints
 import edu.uoc.pac4.data.util.OAuthConstants
-import edu.uoc.pac4.data.oauth.model.OAuthTokensResponse
+import edu.uoc.pac4.data.authentication.model.OAuthTokensResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 

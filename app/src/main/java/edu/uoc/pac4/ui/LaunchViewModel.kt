@@ -3,7 +3,7 @@ package edu.uoc.pac4.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import edu.uoc.pac4.data.oauth.repository.AuthenticationRepository
+import edu.uoc.pac4.data.authentication.repository.AuthenticationRepository
 import kotlinx.coroutines.launch
 
 /**

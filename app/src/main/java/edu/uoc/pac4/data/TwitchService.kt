@@ -3,7 +3,7 @@ package edu.uoc.pac4.data
 import android.util.Log
 import edu.uoc.pac4.data.util.Endpoints
 import edu.uoc.pac4.data.util.OAuthConstants
-import edu.uoc.pac4.data.oauth.model.OAuthTokensResponse
+import edu.uoc.pac4.data.authentication.model.OAuthTokensResponse
 import edu.uoc.pac4.data.util.OAuthException.Unauthorized
 import edu.uoc.pac4.data.streams.StreamsResponse
 import edu.uoc.pac4.data.user.User

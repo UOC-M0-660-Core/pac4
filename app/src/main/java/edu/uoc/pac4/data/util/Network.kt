@@ -2,8 +2,8 @@ package edu.uoc.pac4.data.util
 
 import android.content.Context
 import android.util.Log
-import edu.uoc.pac4.data.oauth.model.OAuthTokensResponse
-import edu.uoc.pac4.data.oauth.datasource.SessionManager
+import edu.uoc.pac4.data.authentication.model.OAuthTokensResponse
+import edu.uoc.pac4.data.authentication.datasource.SessionManager
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import io.ktor.client.features.*

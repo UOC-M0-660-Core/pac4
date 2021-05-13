@@ -13,9 +13,9 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import edu.uoc.pac4.ui.LaunchActivity
 import edu.uoc.pac4.R
-import edu.uoc.pac4.data.oauth.datasource.SessionManager
+import edu.uoc.pac4.data.authentication.datasource.SessionManager
 import edu.uoc.pac4.data.TwitchApiService
-import edu.uoc.pac4.data.oauth.repository.AuthenticationRepository
+import edu.uoc.pac4.data.authentication.repository.AuthenticationRepository
 import edu.uoc.pac4.data.util.Endpoints
 import edu.uoc.pac4.data.util.Network
 import edu.uoc.pac4.data.util.OAuthConstants
