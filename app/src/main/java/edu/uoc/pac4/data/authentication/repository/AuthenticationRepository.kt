@@ -9,7 +9,7 @@ interface AuthenticationRepository {
     /// Returns true if a user exists. False otherwise
     suspend fun isUserAvailable(): Boolean
 
-    /// Returns true if the user logged in successfully. False otherwise
+    /// Perform login with the given authorizationCode
     suspend fun login(authorizationCode: String)
 
     /// Log out the current user
