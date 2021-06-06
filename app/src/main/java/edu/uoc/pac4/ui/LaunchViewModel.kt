@@ -19,12 +19,7 @@ class LaunchViewModel(
     // Live Data
     val isUserAvailable = MutableLiveData<Boolean>()
 
-    init {
-        getUserAvailability()
-    }
-
-
-    private fun getUserAvailability() {
+    fun getUserAvailability() {
         // Get Availability from Repository and post result
         viewModelScope.launch {
             isUserAvailable.postValue(repository.isUserAvailable())

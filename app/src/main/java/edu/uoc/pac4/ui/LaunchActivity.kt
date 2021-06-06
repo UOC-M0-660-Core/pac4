@@ -17,6 +17,8 @@ class LaunchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_launch)
         // Init observers for ViewModel LiveData
         initObservers()
+        // Initial instructions
+        viewModel.getUserAvailability()
     }
 
     private fun initObservers() {
