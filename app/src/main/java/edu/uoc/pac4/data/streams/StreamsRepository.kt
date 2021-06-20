@@ -8,9 +8,15 @@ import kotlinx.coroutines.flow.Flow
  */
 
 interface StreamsRepository {
-    /// Returns a Pair object containing
-    /// first: (nullable) Pagination cursor
+    /// Returns a Flow containing a Pair object with
+    /// first: Pagination cursor
     /// second: List of Streams
     @Throws(Unauthorized::class)
-    suspend fun getStreams(cursor: String? = null): Flow<Pair<String?, List<Stream>>>
+    suspend fun fetchInitialStreams(forceRefresh: Boolean): Flow<Pair<String?, List<Stream>>>
+
+    /// Returns a Pair object containing
+    /// first: Pagination cursor
+    /// second: List of Streams
+    @Throws(Unauthorized::class)
+    suspend fun fetchMoreStreams(cursor: String?): Pair<String?, List<Stream>>
 }
