@@ -1,8 +1,8 @@
 package edu.uoc.pac4.data.streams.datasource
 
 import edu.uoc.pac4.data.network.Endpoints
-import edu.uoc.pac4.data.network.UnauthorizedException
-import edu.uoc.pac4.data.streams.model.StreamsResponse
+import edu.uoc.pac4.data.network.OAuthException
+import edu.uoc.pac4.data.streams.datasource.model.StreamsApiResponse
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
@@ -16,19 +16,19 @@ import kotlinx.coroutines.withContext
 
 class StreamsRemoteDataSource(private val client: HttpClient) {
 
-    suspend fun getStreams(cursor: String?): StreamsResponse? = withContext(Dispatchers.IO) {
+    suspend fun getStreams(cursor: String?): StreamsApiResponse = withContext(Dispatchers.IO) {
         try {
-            val response = client.get<StreamsResponse?>(Endpoints.streamsUrl) {
+            val response = client.get<StreamsApiResponse>(Endpoints.streamsUrl) {
                 cursor?.let { parameter("after", it) }
             }
             response
         } catch (t: Throwable) {
             (t as? ClientRequestException)?.let {
                 if (it.response?.status == HttpStatusCode.Unauthorized) {
-                    throw UnauthorizedException
+                    throw OAuthException.UnauthorizedException
                 }
             }
-            null
+            throw t
         }
     }
 }

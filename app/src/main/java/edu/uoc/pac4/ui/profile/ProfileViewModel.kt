@@ -3,8 +3,8 @@ package edu.uoc.pac4.ui.profile
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import edu.uoc.pac4.data.network.OAuthException
 import edu.uoc.pac4.data.oauth.AuthenticationRepository
-import edu.uoc.pac4.data.network.UnauthorizedException
 import edu.uoc.pac4.data.user.model.User
 import edu.uoc.pac4.data.user.UserRepository
 import kotlinx.coroutines.launch
@@ -33,7 +33,7 @@ class ProfileViewModel(
                 val userResult = userRepository.getUser()
                 // Post User Value
                 user.postValue(userResult)
-            } catch (e: UnauthorizedException) {
+            } catch (e: OAuthException.UnauthorizedException) {
                 isLoggedOut.postValue(true)
             }
             // Set Loading
@@ -51,7 +51,7 @@ class ProfileViewModel(
                 val userResult = userRepository.updateUser(description)
                 // Post User Value
                 user.postValue(userResult)
-            } catch (e: UnauthorizedException) {
+            } catch (e: OAuthException.UnauthorizedException) {
                 isLoggedOut.postValue(true)
             }
             // Set Loading

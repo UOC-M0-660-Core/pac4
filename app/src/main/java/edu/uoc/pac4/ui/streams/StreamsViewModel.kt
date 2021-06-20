@@ -1,18 +1,25 @@
 package edu.uoc.pac4.ui.streams
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import edu.uoc.pac4.data.network.UnauthorizedException
-import edu.uoc.pac4.data.streams.model.Stream
+import edu.uoc.pac4.data.network.OAuthException
 import edu.uoc.pac4.data.streams.StreamsRepository
+import edu.uoc.pac4.data.streams.model.Stream
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
  * Created by alex on 12/09/2020.
  */
 
-class StreamsViewModel(private val repository: StreamsRepository) : ViewModel() {
+class StreamsViewModel(
+    private val repository: StreamsRepository,
+) : ViewModel() {
+
+    private val TAG = "StreamsViewModel"
 
     // Observables
     val streams = MutableLiveData<List<Stream>>(emptyList())
@@ -21,28 +28,57 @@ class StreamsViewModel(private val repository: StreamsRepository) : ViewModel() 
 
     private var cursor: String? = null
 
-    /// Gets Streams
-    fun getStreams(refresh: Boolean) {
+    init {
+        getInitialStreams(forceRefresh = false)
+    }
+
+    // Gets initial streams
+    // Used when screen starts or on refresh
+    fun getInitialStreams(forceRefresh: Boolean) {
+        cursor = null
+        isLoading.postValue(true)
         viewModelScope.launch {
-            // Set Loading to true
-            isLoading.postValue(true)
+            repository.fetchInitialStreams(forceRefresh)
+                .catch {
+                    Log.i(TAG, "Got error getting initial streams: $it")
+                    // Handle error
+                    if (it is OAuthException) {
+                        isLoggedOut.postValue(true)
+                    }
+                    isLoading.postValue(false)
+                }.collect {
+                    Log.i(TAG, "Got ${it.second.count()} initial streams with cursor ${it.first}")
+                    // Emit
+                    streams.postValue(it.second)
+                    // Save cursor
+                    cursor = it.first
+                    isLoading.postValue(false)
+                }
+        }
+    }
+
+    /// Gets More Streams
+    fun getMoreStreams() {
+        // Set Loading to true
+        isLoading.value = true
+        viewModelScope.launch {
             // Get Streams
             try {
-                val streamsResult = repository.getStreams(cursor = if (refresh) null else cursor)
+                val streamsResult = repository.fetchMoreStreams(cursor)
+                Log.i(
+                    TAG,
+                    "Got ${streamsResult.second.count()} more streams with cursor ${streamsResult.first}"
+                )
                 // Store cursor
                 cursor = streamsResult.first
-                // Set Streams Value
-                if (refresh) {
-                    // Set new list
-                    streams.postValue(streamsResult.second)
-                } else {
-                    // Append to current list
-                    val currentStreams = streams.value.orEmpty()
-                    val totalStreams = currentStreams.plus(streamsResult.second)
-                    streams.postValue(totalStreams)
-                }
-            } catch (e: UnauthorizedException) {
+                // Append to current streams list
+                val currentStreams = streams.value.orEmpty()
+                val totalStreams = currentStreams.plus(streamsResult.second)
+                streams.postValue(totalStreams)
+            } catch (e: OAuthException) {
                 isLoggedOut.postValue(true)
+            } catch (t: Throwable) {
+                Log.w("StreamsViewModel", "Unhandled error: $t")
             }
             // Set Loading to false
             isLoading.postValue(false)

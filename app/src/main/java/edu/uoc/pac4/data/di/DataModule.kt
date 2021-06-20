@@ -1,5 +1,7 @@
 package edu.uoc.pac4.data.di
 
+import androidx.room.Room
+import edu.uoc.pac4.data.database.AppDatabase
 import edu.uoc.pac4.data.network.Network
 import edu.uoc.pac4.data.oauth.AuthenticationRepository
 import edu.uoc.pac4.data.oauth.OAuthAuthenticationRepository
@@ -26,6 +28,17 @@ val dataModule = module {
     factory<HttpClient> {
         Network.createHttpClient(context = androidContext())
     }
+    // Database
+    single<AppDatabase> {
+        Room.databaseBuilder(
+            androidContext(),
+            AppDatabase::class.java, "app-database"
+        ).build()
+    }
+    // Streams DAO
+    single {
+        get<AppDatabase>().streamDao()
+    }
     // Authentication
     factory { SessionManager(context = androidContext()) }
     factory { OAuthRemoteDataSource(client = get()) }
@@ -35,7 +48,7 @@ val dataModule = module {
     // Streams
     factory { StreamsRemoteDataSource(client = get()) }
     single<StreamsRepository> {
-        TwitchStreamsRepository(remoteDataSource = get())
+        TwitchStreamsRepository(remoteDataSource = get(), localDataSource = get())
     }
     // User
     factory { UserRemoteDataSource(client = get()) }

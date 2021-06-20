@@ -1,6 +1,6 @@
 package edu.uoc.pac4.data.user
 
-import edu.uoc.pac4.data.network.UnauthorizedException
+import edu.uoc.pac4.data.network.OAuthException
 import edu.uoc.pac4.data.user.model.User
 
 /**
@@ -8,10 +8,10 @@ import edu.uoc.pac4.data.user.model.User
  */
 interface UserRepository {
 
-    @Throws(UnauthorizedException::class)
+    @Throws(OAuthException::class)
     suspend fun getUser(): User?
 
-    @Throws(UnauthorizedException::class)
+    @Throws(OAuthException::class)
     suspend fun updateUser(description: String): User?
 
 }

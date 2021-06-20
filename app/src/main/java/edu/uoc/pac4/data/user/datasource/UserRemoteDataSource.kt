@@ -2,7 +2,7 @@ package edu.uoc.pac4.data.user.datasource
 
 import android.util.Log
 import edu.uoc.pac4.data.network.Endpoints
-import edu.uoc.pac4.data.network.UnauthorizedException
+import edu.uoc.pac4.data.network.OAuthException
 import edu.uoc.pac4.data.user.model.User
 import edu.uoc.pac4.data.user.model.UsersResponse
 import io.ktor.client.*
@@ -27,7 +27,7 @@ class UserRemoteDataSource(private val client: HttpClient) {
         } catch (t: Throwable) {
             (t as? ClientRequestException)?.let {
                 if (it.response?.status == HttpStatusCode.Unauthorized) {
-                    throw UnauthorizedException
+                    throw OAuthException.UnauthorizedException
                 }
             }
             Log.d(TAG, "Error retrieving user", t)
@@ -44,7 +44,7 @@ class UserRemoteDataSource(private val client: HttpClient) {
         } catch (t: Throwable) {
             (t as? ClientRequestException)?.let {
                 if (it.response?.status == HttpStatusCode.Unauthorized) {
-                    throw UnauthorizedException
+                    throw OAuthException.UnauthorizedException
                 }
             }
             Log.d(TAG, "Error updating user", t)

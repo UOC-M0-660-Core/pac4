@@ -30,12 +30,10 @@ class StreamsActivity : AppCompatActivity() {
         initRecyclerView()
         // Swipe to Refresh Listener
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getStreams(refresh = true)
+            viewModel.getInitialStreams(forceRefresh = true)
         }
         // Init LiveData Observers
         initObservers()
-        // Get Streams
-        viewModel.getStreams(refresh = true)
     }
 
     private fun initRecyclerView() {
@@ -46,7 +44,7 @@ class StreamsActivity : AppCompatActivity() {
         // Set Pagination Listener
         recyclerView.addOnScrollListener(object : PaginationScrollListener(layoutManager) {
             override fun loadMoreItems() {
-                viewModel.getStreams(refresh = false)
+                viewModel.getMoreStreams()
             }
 
             override fun isLastPage(): Boolean {
