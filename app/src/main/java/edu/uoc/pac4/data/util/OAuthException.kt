@@ -8,4 +8,5 @@ sealed class OAuthException : Throwable() {
 
     object Unauthorized : OAuthException()
 
+    // TODO: Maybe add other exceptions
 }

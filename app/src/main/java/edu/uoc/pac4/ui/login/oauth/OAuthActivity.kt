@@ -25,7 +25,7 @@ import org.koin.android.ext.android.inject
 
 class OAuthActivity : AppCompatActivity() {
 
-    private val TAG = "StreamsActivity"
+    private val TAG = "OAuthActivity"
 
     // Temporary repository before creating the OAuthViewModel
     val repository: AuthenticationRepository by inject()

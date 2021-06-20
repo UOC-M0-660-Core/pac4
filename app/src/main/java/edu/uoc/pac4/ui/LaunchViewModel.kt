@@ -16,13 +16,32 @@ class LaunchViewModel(
     private val repository: AuthenticationRepository
 ) : ViewModel() {
 
-    // Live Data
+    // User availability Observable
     val isUserAvailable = MutableLiveData<Boolean>()
 
+    // Observable to expose loading status
+    val isLoading = MutableLiveData<Boolean>()
+
+    // Observable to expose errors to the user
+    val error = MutableLiveData<String>()
+
     fun getUserAvailability() {
+        // Set Loading to true
+        isLoading.postValue(true)
         // Get Availability from Repository and post result
         viewModelScope.launch {
-            isUserAvailable.postValue(repository.isUserAvailable())
+            try {
+                // Ask the repository for user availability
+                // (here the coroutine will "suspend" waiting for the response)
+                val isUserAvailable = repository.isUserAvailable()
+                // Post the response to the Live Data observable
+                this@LaunchViewModel.isUserAvailable.postValue(isUserAvailable)
+            } catch (t: Throwable) {
+                // Post error
+                error.postValue("Unknown error")
+            }
+            // Set Loading to false
+            isLoading.postValue(false)
         }
     }
 }

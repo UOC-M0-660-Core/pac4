@@ -19,11 +19,11 @@ val dataModule = module {
     // TODO: Init your other Data Dependencies
 
     // Utils
-    single<HttpClient> {
+    factory<HttpClient> {
         Network.createHttpClient(
             androidContext(),
             OAuthConstants.clientID,
-            OAuthConstants.clientSecret
+            OAuthConstants.clientSecret,
         )
     }
 
